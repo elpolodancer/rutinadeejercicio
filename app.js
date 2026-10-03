@@ -120,3 +120,6 @@ document.getElementById("btn-hoy").addEventListener("click", () => {
 });
 
 dibujarAnio();
+
+/* La app cargó completa: quitar el aviso de diagnóstico */
+document.getElementById("estado").remove();

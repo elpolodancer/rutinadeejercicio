@@ -15,6 +15,8 @@
         <button type="button" data-ir="calendario">Calendario</button>
         <button type="button" data-ir="ejercicios">Ejercicios</button>
       </div>
+      <!-- Aviso temporal: app.js lo borra cuando carga bien -->
+      <p class="estado" id="estado">La app no terminó de cargar. Recarga sin caché (Ctrl+Shift+R) y revisa que app.js esté junto a index.html.</p>
     </section>
 
     <!-- Calendario -->
@@ -42,6 +44,18 @@
       <div class="botones" id="botones"></div>
     </section>
   </main>
+  <script>
+    /* Aviso temporal: muestra en pantalla cualquier error de carga o de JavaScript */
+    window.addEventListener("error", function (e) {
+      var p = document.getElementById("estado");
+      if (!p) return;
+      if (e.target && e.target.src) {
+        p.textContent = "No se pudo cargar " + e.target.src.split("/").pop() + ". Revisa que esté en la misma carpeta que index.html.";
+      } else {
+        p.textContent = "Error de JavaScript: " + e.message + " (" + String(e.filename).split("/").pop() + ", línea " + e.lineno + ")";
+      }
+    }, true);
+  </script>
   <script src="app.js" defer></script>
 </body>
 </html>

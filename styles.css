@@ -1,19 +1,13 @@
 :root {
-  --fondo: #f2f3ee;
-  --tinta: #1a1d24;
+  --fondo: #bfe3f8;
+  --tinta: #14233a;
   --acento: #2447ff;
-  --borde: #1a1d24;
+  --borde: #14233a;
   --texto-acento: #ffffff;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --fondo: #14161b;
-    --tinta: #eceee8;
-    --acento: #6f89ff;
-    --borde: #eceee8;
-    --texto-acento: #14161b;
-  }
+html {
+  background: var(--fondo);
 }
 
 * { box-sizing: border-box; }
@@ -89,6 +83,18 @@ h1 {
 
 /* ---------- Pantallas ---------- */
 .vista[hidden] { display: none; }
+
+#vista-inicio:not([hidden]) {
+  min-height: calc(100vh - 80px);
+  min-height: calc(100dvh - 80px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#vista-inicio h1 {
+  text-align: center;
+}
 
 .menu {
   display: grid;
@@ -219,4 +225,15 @@ h1 {
 @media (min-width: 560px) {
   main { max-width: 860px; }
   .meses { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ---------- Aviso temporal de diagnóstico ---------- */
+.estado {
+  margin-top: 24px;
+  padding: 10px 14px;
+  font-size: 1.05rem;
+  background: #fff4c2;
+  color: #14233a;
+  border: 2px solid #14233a;
+  border-radius: 6px;
 }
