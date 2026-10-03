@@ -22,9 +22,11 @@ const ejercicios = [
   "Lagartijas",
   "Sentadillas",
   "Abdominales",
-  "Levantamiento de Barra 1",
-  "Levantamiento de Barra 2",
-  "Levantamiento de Barra 3",
+  "Barra 1 Levantamiento Vertical de Pie",
+  "Barra 2 Levantamiento Vertical sobre Espalda de Pie",
+  "Barra 3 Sentadilla con Barra",
+  "Barra 4 Bombeo Inferior Inclinado",
+  "Barra 5 Acostado",
   "Sentadilla con Barra",
   "Plancha",
   "Salto de Tijera"
@@ -33,17 +35,91 @@ const ejercicios = [
 const contenedor = document.getElementById("botones");
 const actual = document.getElementById("actual");
 
-function seleccionar(boton, nombre) {
-  contenedor.querySelectorAll("button").forEach(b => b.classList.remove("activo"));
-  boton.classList.add("activo");
-  actual.textContent = "Ejercicio: " + nombre;
+/* Cantidades guardadas en el navegador (una por ejercicio) */
+const CLAVE_CANTIDADES = "rutina-cantidades";
+
+function leerCantidades() {
+  try {
+    return JSON.parse(localStorage.getItem(CLAVE_CANTIDADES)) || {};
+  } catch (e) {
+    return {};
+  }
 }
 
+function guardarCantidades() {
+  try {
+    localStorage.setItem(CLAVE_CANTIDADES, JSON.stringify(cantidades));
+  } catch (e) {
+    /* si el navegador no permite guardar, la cantidad solo dura mientras la página esté abierta */
+  }
+}
+
+const cantidades = leerCantidades();
+const etiquetasCuenta = {};
+
+function textoCuenta(n) {
+  return n + (n === 1 ? " vez" : " veces");
+}
+
+/* Submenú */
+const submenu = document.getElementById("submenu");
+const subTitulo = document.getElementById("sub-titulo");
+const campoCantidad = document.getElementById("cantidad");
+let ejercicioAbierto = null;
+
+function leerCampo() {
+  const n = Math.floor(Number(campoCantidad.value));
+  return Number.isFinite(n) && n > 0 ? n : 0;
+}
+
+function abrirSubmenu(nombre) {
+  ejercicioAbierto = nombre;
+  subTitulo.textContent = nombre;
+  campoCantidad.value = cantidades[nombre] || 0;
+  submenu.showModal();
+}
+
+function guardarEjercicio() {
+  const n = leerCampo();
+  cantidades[ejercicioAbierto] = n;
+  guardarCantidades();
+  etiquetasCuenta[ejercicioAbierto].textContent = n > 0 ? textoCuenta(n) : "";
+  actual.textContent = ejercicioAbierto + ": " + textoCuenta(n);
+  submenu.close();
+}
+
+document.getElementById("menos").addEventListener("click", () => {
+  campoCantidad.value = Math.max(0, leerCampo() - 1);
+});
+document.getElementById("mas").addEventListener("click", () => {
+  campoCantidad.value = leerCampo() + 1;
+});
+document.getElementById("guardar").addEventListener("click", guardarEjercicio);
+document.getElementById("cancelar").addEventListener("click", () => submenu.close());
+campoCantidad.addEventListener("keydown", e => {
+  if (e.key === "Enter") guardarEjercicio();
+});
+/* Tocar fuera del cuadro lo cierra */
+submenu.addEventListener("click", e => {
+  if (e.target === submenu) submenu.close();
+});
+
+/* Botones de ejercicios */
 ejercicios.forEach(nombre => {
   const boton = document.createElement("button");
   boton.type = "button";
-  boton.textContent = nombre;
-  boton.addEventListener("click", () => seleccionar(boton, nombre));
+
+  const etiquetaNombre = document.createElement("span");
+  etiquetaNombre.textContent = nombre;
+
+  const etiquetaCuenta = document.createElement("span");
+  etiquetaCuenta.className = "cuenta";
+  const guardada = cantidades[nombre];
+  etiquetaCuenta.textContent = guardada > 0 ? textoCuenta(guardada) : "";
+  etiquetasCuenta[nombre] = etiquetaCuenta;
+
+  boton.append(etiquetaNombre, etiquetaCuenta);
+  boton.addEventListener("click", () => abrirSubmenu(nombre));
   contenedor.appendChild(boton);
 });
 

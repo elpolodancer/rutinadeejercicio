@@ -44,6 +44,23 @@
       <div class="botones" id="botones"></div>
     </section>
   </main>
+
+  <!-- Submenú de ejercicio -->
+  <dialog id="submenu" aria-labelledby="sub-titulo">
+    <div class="sub-contenido">
+      <h2 id="sub-titulo"></h2>
+      <p class="sub-pregunta">¿Cuántas veces lo has hecho?</p>
+      <div class="contador">
+        <button type="button" id="menos" aria-label="Restar uno">&minus;</button>
+        <input type="number" id="cantidad" inputmode="numeric" min="0" step="1" value="0" aria-label="Cantidad de veces">
+        <button type="button" id="mas" aria-label="Sumar uno">+</button>
+      </div>
+      <div class="acciones">
+        <button type="button" id="cancelar" class="secundario">Cancelar</button>
+        <button type="button" id="guardar" class="principal">Guardar</button>
+      </div>
+    </div>
+  </dialog>
   <script>
     /* Aviso temporal: muestra en pantalla cualquier error de carga o de JavaScript */
     window.addEventListener("error", function (e) {

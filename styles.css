@@ -56,6 +56,10 @@ h1 {
 }
 
 .botones button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
   font: inherit;
   font-size: 1.35rem;
   font-weight: 700;
@@ -76,13 +80,6 @@ h1 {
 .botones button:focus-visible {
   outline: 3px solid var(--acento);
   outline-offset: 3px;
-}
-
-.botones button.activo {
-  background: var(--acento);
-  border-color: var(--acento);
-  color: var(--texto-acento);
-  text-shadow: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -228,6 +225,112 @@ h1 {
 @media (min-width: 560px) {
   main { max-width: 860px; }
   .meses { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ---------- Submenú de ejercicio ---------- */
+.cuenta {
+  font-size: 1.1rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+dialog {
+  width: min(92vw, 420px);
+  padding: 0;
+  color: var(--tinta);
+  background: var(--fondo);
+  border: 2px solid var(--borde);
+  border-radius: 8px;
+  text-shadow: var(--trazo);
+}
+
+dialog::backdrop {
+  background: rgba(20, 35, 58, 0.45);
+}
+
+.sub-contenido {
+  padding: 22px 20px;
+}
+
+dialog h2 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin: 0 0 6px;
+}
+
+.sub-pregunta {
+  font-size: 1.2rem;
+  margin: 0 0 18px;
+}
+
+.contador {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.contador button {
+  font: inherit;
+  font-size: 2rem;
+  line-height: 1;
+  width: 64px;
+  height: 64px;
+  color: var(--tinta);
+  background: transparent;
+  border: 2px solid var(--borde);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.contador input {
+  flex: 1;
+  min-width: 0;
+  height: 64px;
+  font: inherit;
+  font-size: 2rem;
+  font-weight: 800;
+  text-align: center;
+  color: var(--tinta);
+  background: rgba(255, 255, 255, 0.75);
+  border: 2px solid var(--borde);
+  border-radius: 6px;
+  text-shadow: none;
+}
+
+.acciones {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.acciones button {
+  font: inherit;
+  font-size: 1.3rem;
+  font-weight: 800;
+  min-height: 56px;
+  border: 2px solid var(--borde);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.acciones .secundario {
+  color: var(--tinta);
+  background: transparent;
+}
+
+.acciones .principal {
+  color: var(--texto-acento);
+  background: var(--acento);
+  border-color: var(--acento);
+  text-shadow: none;
+}
+
+.contador button:focus-visible,
+.contador input:focus-visible,
+.acciones button:focus-visible {
+  outline: 3px solid var(--acento);
+  outline-offset: 3px;
 }
 
 /* ---------- Aviso temporal de diagnóstico ---------- */
