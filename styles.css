@@ -50,8 +50,8 @@ h1 {
 
 .botones {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+  grid-template-columns: 1fr;
+  gap: 10px;
 }
 
 .botones button {
@@ -59,8 +59,8 @@ h1 {
   font-size: 1.35rem;
   font-weight: 700;
   text-align: left;
-  padding: 18px 16px;
-  min-height: 84px;
+  padding: 16px 20px;
+  min-height: 64px;
   color: var(--tinta);
   background: transparent;
   border: 2px solid var(--borde);
@@ -83,10 +83,6 @@ h1 {
   color: var(--texto-acento);
 }
 
-@media (max-width: 380px) {
-  .botones { grid-template-columns: 1fr; }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .botones button { transition: none; }
 }
@@ -96,8 +92,8 @@ h1 {
 
 .menu {
   display: grid;
-  gap: 16px;
-  margin-top: 40px;
+  gap: 12px;
+  margin-top: 32px;
 }
 
 .menu button {
@@ -105,7 +101,8 @@ h1 {
   font-size: clamp(2rem, 8vw, 2.8rem);
   font-weight: 800;
   text-align: left;
-  padding: 36px 24px;
+  padding: 22px 24px;
+  min-height: 76px;
   color: var(--tinta);
   background: transparent;
   border: 2px solid var(--borde);

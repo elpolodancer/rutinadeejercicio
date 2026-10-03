@@ -54,8 +54,8 @@ const nombresMeses = [
 ];
 const diasSemana = ["L", "M", "M", "J", "V", "S", "D"]; // la semana empieza en lunes
 
-const hoy = new Date();
-let anioMostrado = hoy.getFullYear();
+const fechaHoy = new Date();
+let anioMostrado = fechaHoy.getFullYear();
 
 const contenedorMeses = document.getElementById("meses");
 const etiquetaAnio = document.getElementById("anio");
@@ -88,7 +88,7 @@ function crearMes(anio, mes) {
     const c = document.createElement("span");
     c.className = "dia";
     c.textContent = d;
-    if (anio === hoy.getFullYear() && mes === hoy.getMonth() && d === hoy.getDate()) {
+    if (anio === fechaHoy.getFullYear() && mes === fechaHoy.getMonth() && d === fechaHoy.getDate()) {
       c.classList.add("hoy-dia");
     }
     rejilla.appendChild(c);
@@ -114,8 +114,8 @@ document.getElementById("anio-sig").addEventListener("click", () => {
   anioMostrado++;
   dibujarAnio();
 });
-document.getElementById("hoy").addEventListener("click", () => {
-  anioMostrado = hoy.getFullYear();
+document.getElementById("btn-hoy").addEventListener("click", () => {
+  anioMostrado = fechaHoy.getFullYear();
   dibujarAnio();
 });
 
