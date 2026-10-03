@@ -8,9 +8,39 @@
 </head>
 <body>
   <main>
-    <h1>Mi rutina</h1>
-    <p class="actual" id="actual" aria-live="polite">Elige un ejercicio para empezar.</p>
-    <div class="botones" id="botones"></div>
+    <!-- Pantalla principal -->
+    <section id="vista-inicio" class="vista">
+      <h1>Mi rutina</h1>
+      <div class="menu">
+        <button type="button" data-ir="calendario">Calendario</button>
+        <button type="button" data-ir="ejercicios">Ejercicios</button>
+      </div>
+    </section>
+
+    <!-- Calendario -->
+    <section id="vista-calendario" class="vista" hidden>
+      <header class="barra">
+        <button type="button" class="volver" data-ir="inicio">Volver</button>
+        <h2>Calendario</h2>
+      </header>
+      <div class="anio-nav">
+        <button type="button" id="anio-ant" aria-label="Año anterior">&lsaquo;</button>
+        <span id="anio" aria-live="polite"></span>
+        <button type="button" id="anio-sig" aria-label="Año siguiente">&rsaquo;</button>
+      </div>
+      <button type="button" id="hoy" class="hoy">Ir al año actual</button>
+      <div class="meses" id="meses"></div>
+    </section>
+
+    <!-- Ejercicios -->
+    <section id="vista-ejercicios" class="vista" hidden>
+      <header class="barra">
+        <button type="button" class="volver" data-ir="inicio">Volver</button>
+        <h2>Ejercicios</h2>
+      </header>
+      <p class="actual" id="actual" aria-live="polite">Elige un ejercicio para empezar.</p>
+      <div class="botones" id="botones"></div>
+    </section>
   </main>
   <script src="app.js"></script>
 </body>

@@ -1,3 +1,22 @@
+/* ---------- Navegación entre pantallas ---------- */
+const vistas = {
+  inicio: document.getElementById("vista-inicio"),
+  calendario: document.getElementById("vista-calendario"),
+  ejercicios: document.getElementById("vista-ejercicios")
+};
+
+function irA(nombre) {
+  Object.entries(vistas).forEach(([clave, vista]) => {
+    vista.hidden = clave !== nombre;
+  });
+  window.scrollTo(0, 0);
+}
+
+document.querySelectorAll("[data-ir]").forEach(boton => {
+  boton.addEventListener("click", () => irA(boton.dataset.ir));
+});
+
+/* ---------- Ejercicios ---------- */
 const ejercicios = [
   "Baile",
   "Lagartijas",
@@ -27,3 +46,77 @@ ejercicios.forEach(nombre => {
   boton.addEventListener("click", () => seleccionar(boton, nombre));
   contenedor.appendChild(boton);
 });
+
+/* ---------- Calendario ---------- */
+const nombresMeses = [
+  "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+  "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+];
+const diasSemana = ["L", "M", "M", "J", "V", "S", "D"]; // la semana empieza en lunes
+
+const hoy = new Date();
+let anioMostrado = hoy.getFullYear();
+
+const contenedorMeses = document.getElementById("meses");
+const etiquetaAnio = document.getElementById("anio");
+
+function crearMes(anio, mes) {
+  const caja = document.createElement("div");
+  caja.className = "mes";
+
+  const titulo = document.createElement("h3");
+  titulo.textContent = nombresMeses[mes];
+  caja.appendChild(titulo);
+
+  const rejilla = document.createElement("div");
+  rejilla.className = "dias";
+
+  diasSemana.forEach(letra => {
+    const c = document.createElement("span");
+    c.className = "dia-semana";
+    c.textContent = letra;
+    rejilla.appendChild(c);
+  });
+
+  const desfase = (new Date(anio, mes, 1).getDay() + 6) % 7; // lunes = 0
+  for (let i = 0; i < desfase; i++) {
+    rejilla.appendChild(document.createElement("span"));
+  }
+
+  const totalDias = new Date(anio, mes + 1, 0).getDate();
+  for (let d = 1; d <= totalDias; d++) {
+    const c = document.createElement("span");
+    c.className = "dia";
+    c.textContent = d;
+    if (anio === hoy.getFullYear() && mes === hoy.getMonth() && d === hoy.getDate()) {
+      c.classList.add("hoy-dia");
+    }
+    rejilla.appendChild(c);
+  }
+
+  caja.appendChild(rejilla);
+  return caja;
+}
+
+function dibujarAnio() {
+  etiquetaAnio.textContent = anioMostrado;
+  contenedorMeses.replaceChildren();
+  for (let m = 0; m < 12; m++) {
+    contenedorMeses.appendChild(crearMes(anioMostrado, m));
+  }
+}
+
+document.getElementById("anio-ant").addEventListener("click", () => {
+  anioMostrado--;
+  dibujarAnio();
+});
+document.getElementById("anio-sig").addEventListener("click", () => {
+  anioMostrado++;
+  dibujarAnio();
+});
+document.getElementById("hoy").addEventListener("click", () => {
+  anioMostrado = hoy.getFullYear();
+  dibujarAnio();
+});
+
+dibujarAnio();

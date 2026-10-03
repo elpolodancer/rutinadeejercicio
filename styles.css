@@ -90,3 +90,136 @@ h1 {
 @media (prefers-reduced-motion: reduce) {
   .botones button { transition: none; }
 }
+
+/* ---------- Pantallas ---------- */
+.vista[hidden] { display: none; }
+
+.menu {
+  display: grid;
+  gap: 16px;
+  margin-top: 40px;
+}
+
+.menu button {
+  font: inherit;
+  font-size: clamp(2rem, 8vw, 2.8rem);
+  font-weight: 800;
+  text-align: left;
+  padding: 36px 24px;
+  color: var(--tinta);
+  background: transparent;
+  border: 2px solid var(--borde);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s, transform 0.1s;
+}
+
+.menu button:first-child {
+  background: var(--acento);
+  border-color: var(--acento);
+  color: var(--texto-acento);
+}
+
+.menu button:hover { filter: brightness(1.08); }
+.menu button:active { transform: scale(0.98); }
+.menu button:focus-visible,
+.volver:focus-visible,
+.anio-nav button:focus-visible,
+.hoy:focus-visible {
+  outline: 3px solid var(--acento);
+  outline-offset: 3px;
+}
+
+.barra {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.barra h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  margin: 0;
+}
+
+.volver, .hoy {
+  font: inherit;
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 8px 14px;
+  color: var(--tinta);
+  background: transparent;
+  border: 2px solid var(--borde);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* ---------- Calendario ---------- */
+.anio-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.anio-nav button {
+  font: inherit;
+  font-size: 2rem;
+  line-height: 1;
+  width: 52px;
+  height: 52px;
+  color: var(--tinta);
+  background: transparent;
+  border: 2px solid var(--borde);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#anio {
+  font-size: 2.6rem;
+  font-weight: 800;
+}
+
+.hoy { margin-bottom: 20px; }
+
+.meses {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px 16px;
+}
+
+.mes h3 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin: 0 0 6px;
+}
+
+.dias {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+.dia-semana {
+  font-weight: 700;
+  opacity: 0.55;
+}
+
+.dia {
+  padding: 3px 0;
+  border-radius: 4px;
+}
+
+.hoy-dia {
+  background: var(--acento);
+  color: var(--texto-acento);
+  font-weight: 800;
+}
+
+@media (min-width: 560px) {
+  main { max-width: 860px; }
+  .meses { grid-template-columns: repeat(3, 1fr); }
+}
