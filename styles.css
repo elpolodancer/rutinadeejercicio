@@ -4,6 +4,10 @@
   --acento: #2447ff;
   --borde: #14233a;
   --texto-acento: #ffffff;
+  --trazo:
+    -1px -1px 0 #fff, 0 -1px 0 #fff, 1px -1px 0 #fff,
+    -1px 0 0 #fff,                    1px 0 0 #fff,
+    -1px 1px 0 #fff,  0 1px 0 #fff,  1px 1px 0 #fff;
 }
 
 html {
@@ -12,12 +16,15 @@ html {
 
 * { box-sizing: border-box; }
 
+button { text-shadow: var(--trazo); }
+
 body {
   margin: 0;
   min-height: 100vh;
   background: var(--fondo);
   color: var(--tinta);
   font-family: "Barlow Condensed", "Arial Narrow", Impact, sans-serif;
+  text-shadow: var(--trazo);
   display: flex;
   justify-content: center;
 }
@@ -75,6 +82,7 @@ h1 {
   background: var(--acento);
   border-color: var(--acento);
   color: var(--texto-acento);
+  text-shadow: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -117,13 +125,7 @@ h1 {
   transition: background-color 0.15s, color 0.15s, transform 0.1s;
 }
 
-.menu button:first-child {
-  background: var(--acento);
-  border-color: var(--acento);
-  color: var(--texto-acento);
-}
-
-.menu button:hover { filter: brightness(1.08); }
+.menu button:hover { background: color-mix(in srgb, var(--tinta) 8%, transparent); }
 .menu button:active { transform: scale(0.98); }
 .menu button:focus-visible,
 .volver:focus-visible,
@@ -220,6 +222,7 @@ h1 {
   background: var(--acento);
   color: var(--texto-acento);
   font-weight: 800;
+  text-shadow: none;
 }
 
 @media (min-width: 560px) {
