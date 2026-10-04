@@ -15,6 +15,10 @@
         <button type="button" data-ir="calendario">Calendario</button>
         <button type="button" data-ir="ejercicios">Ejercicios</button>
       </div>
+      <div class="sesion">
+        <p class="sesion-estado" id="sesion-estado" aria-live="polite">Comprobando sesión…</p>
+        <button type="button" id="btn-sesion" class="sesion-boton" hidden>Iniciar sesión con Google</button>
+      </div>
       <!-- Aviso temporal: app.js lo borra cuando carga bien -->
       <p class="estado" id="estado">La app no terminó de cargar. Recarga sin caché (Ctrl+Shift+R) y revisa que app.js esté junto a index.html.</p>
     </section>
@@ -49,12 +53,30 @@
   <dialog id="submenu" aria-labelledby="sub-titulo">
     <div class="sub-contenido">
       <h2 id="sub-titulo"></h2>
-      <p class="sub-pregunta">¿Cuántas veces lo has hecho?</p>
-      <div class="contador">
-        <button type="button" id="menos" aria-label="Restar uno">&minus;</button>
-        <input type="number" id="cantidad" inputmode="numeric" min="0" step="1" value="0" aria-label="Cantidad de veces">
-        <button type="button" id="mas" aria-label="Sumar uno">+</button>
+      <p class="sub-pregunta" id="sub-pregunta"></p>
+
+      <div id="bloque-cantidad">
+        <div class="contador">
+          <button type="button" id="menos" aria-label="Restar uno">&minus;</button>
+          <input type="number" id="cantidad" inputmode="numeric" min="0" step="1" value="0" aria-label="Cantidad de veces">
+          <button type="button" id="mas" aria-label="Sumar uno">+</button>
+        </div>
       </div>
+
+      <div id="bloque-tiempo" hidden>
+        <div class="campo">
+          <input type="text" id="tiempo" inputmode="numeric" placeholder="01:00" autocomplete="off" aria-label="Tiempo en minutos y segundos">
+        </div>
+      </div>
+
+      <div id="bloque-texto" hidden>
+        <div class="campo">
+          <textarea id="canciones" rows="4" placeholder="Canción 1 / Canción 2 / Canción 3" aria-label="Canciones"></textarea>
+        </div>
+      </div>
+
+      <p class="sub-error" id="sub-error" role="alert"></p>
+
       <div class="acciones">
         <button type="button" id="cancelar" class="secundario">Cancelar</button>
         <button type="button" id="guardar" class="principal">Guardar</button>
@@ -73,6 +95,7 @@
       }
     }, true);
   </script>
+  <script type="module" src="firebase-init.js"></script>
   <script src="app.js" defer></script>
 </body>
 </html>

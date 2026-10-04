@@ -126,6 +126,7 @@ h1 {
 .menu button:active { transform: scale(0.98); }
 .menu button:focus-visible,
 .volver:focus-visible,
+.sesion-boton:focus-visible,
 .anio-nav button:focus-visible,
 .hoy:focus-visible {
   outline: 3px solid var(--acento);
@@ -145,7 +146,7 @@ h1 {
   margin: 0;
 }
 
-.volver, .hoy {
+.volver, .hoy, .sesion-boton {
   font: inherit;
   font-size: 1.1rem;
   font-weight: 700;
@@ -298,6 +299,46 @@ dialog h2 {
   text-shadow: none;
 }
 
+.campo {
+  margin-bottom: 18px;
+}
+
+.campo input,
+.campo textarea {
+  display: block;
+  width: 100%;
+  font: inherit;
+  font-weight: 800;
+  color: var(--tinta);
+  background: rgba(255, 255, 255, 0.75);
+  border: 2px solid var(--borde);
+  border-radius: 6px;
+  text-shadow: none;
+}
+
+.campo input {
+  height: 64px;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.campo textarea {
+  min-height: 120px;
+  padding: 10px 12px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  resize: vertical;
+}
+
+.sub-error {
+  margin: 0 0 12px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #a3170e;
+}
+
+.sub-error:empty { display: none; }
+
 .acciones {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -328,9 +369,28 @@ dialog h2 {
 
 .contador button:focus-visible,
 .contador input:focus-visible,
+.campo input:focus-visible,
+.campo textarea:focus-visible,
 .acciones button:focus-visible {
   outline: 3px solid var(--acento);
   outline-offset: 3px;
+}
+
+/* ---------- Sesión ---------- */
+.sesion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 28px;
+  text-align: center;
+}
+
+.sesion-estado {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  overflow-wrap: anywhere;
 }
 
 /* ---------- Aviso temporal de diagnóstico ---------- */
